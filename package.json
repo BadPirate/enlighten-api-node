@@ -1,13 +1,15 @@
 {
   "name": "enlighten-api",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/BadPirate/enlighten-api-node.git"
+    "type": "git",
+    "url": "https://github.com/BadPirate/enlighten-api-node.git"
   },
   "version": "0.0.1",
   "main": "enphase.js",
   "dependencies": {},
   "author": "Jamie Ruderman",
-  "contributors": ["Kevin Lohman <badpirate@gmail.com>"],
+  "contributors": [
+    "Kevin Lohman <badpirate@gmail.com>"
+  ],
   "license": "GNU"
 }
