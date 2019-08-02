@@ -8,7 +8,7 @@ Quick and easy standarization of calls
 
 ## Installation
 
-1. `npm install enphase-api`
+1. `npm install enlighten-api`
 1. Set your Enphase API key and Application Id environment variables. You can find these by logging into your [Enphase developer account](https://developer.enphase.com/admin/applications) and selecting your application. The App id is the last part of the Authorization URL.
 1. Quick set for the current session in a bash shell *(replace with your info)
 
@@ -31,7 +31,7 @@ ENPHASE_APP_ID='140961117xxxx'
 Assuming you have your environmental variables set up, you first require the enphase library:
 
 ```javascript
-import enphase from 'enphase-api';
+import enphase from "enlighten-api";
 ```
 
 Then query the Enphase Enlighten Systems API by instantiating a new `enphase.Request` object.
