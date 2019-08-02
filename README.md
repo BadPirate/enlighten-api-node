@@ -1,52 +1,42 @@
-##NodeJS Enphase Enlighten Systems API Sample
+# NodeJS Enphase Enlighten Systems API
 
-Sample code and library for [NodeJS](https://nodejs.org/). Uses the [Express](http://expressjs.com/) application framework with [Jade](http://jade-lang.com/) templates.
+npm installable API for making calls to the Enlighten Enphase API
 
-The interactions with the API are handled by an [enphase.js](lib/enphase.js) library that could be added to your project.
+## Motivation
 
-### Motivation
+Quick and easy standarization of calls
 
-To provide an example of how to integrate a NodeJS project with the Enphase Enlighten Systems API and create a simple integration library.
+## Installation
 
-### Installation
+1. `npm install enphase-api`
+1. Set your Enphase API key and Application Id environment variables. You can find these by logging into your [Enphase developer account](https://developer.enphase.com/admin/applications) and selecting your application. The App id is the last part of the Authorization URL.
+1. Quick set for the current session in a bash shell *(replace with your info)
 
-1. Set your Enphase API key and Application Id environment variables.
-  You can find these by logging into your [Enphase developer account](https://developer.enphase.com/admin/applications) and selecting your application. The App id is the last part of the Authorization URL.
+### Command line
 
-  Quick set for the current session in a bash shell *(replace with your info)*:
-  ```bash
-  export ENPHASE_API_KEY='3aaa01a221a6603a71853fc1cc2c3a5b'
-  export ENPHASE_APP_ID='140961117xxxx'
-  ```
+```bash
+export ENPHASE_API_KEY='3aaa01a221a6603a71853fc1cc2c3a5b'
+export ENPHASE_APP_ID='140961117xxxx'
+```
 
-  To set permanently add it to your .profile or similar setup depending on your system and server configuration.
+### .env file
 
+```bash
+ENPHASE_API_KEY='3aaa01a221a6603a71853fc1cc2xxxx'
+ENPHASE_APP_ID='140961117xxxx'
+```
 
-2. Install NodeJS. Run the following if on a Mac or visit the [NodeJS](https://nodejs.org/) website to install.
-  ```bash
-  brew install node
-  ```
-
-3. Clone the repo
-  ```bash
-  git clone https://github.com/path_to_project
-  ```
-
-4. Start the node server
-  ```bash
-  node ./bin/www
-  ```
-
-5. Visit http://localhost:3000 in your web browser
-
-### Example
+## Example
 
 Assuming you have your environmental variables set up, you first require the enphase library:
+
 ```javascript
-var enphase = require('../lib/enphase');
+import enphase from 'enphase-api';
 ```
+
 Then query the Enphase Enlighten Systems API by instantiating a new `enphase.Request` object.
 The simplest request is for a user's systems:
+
 ```javascript
 new enphase.Request({
   api: 'systems',
@@ -61,6 +51,7 @@ new enphase.Request({
 ```
 
 The most elaborate will have a `systemId` and `query`:
+
 ```javascript
 new enphase.Request({
   api: 'systems',
@@ -75,15 +66,18 @@ new enphase.Request({
   }
 });
 ```
+
 You can also access the enphase api vars directly from the enphase object:
+
 ```javascript
 var enphaseAuthUrl = enphase.auth,
     enphaseApiKey = enphase.key;
 ```
 
-### Author
+## Original Author
+
 [Jamie Ruderman](http://github.com/JamieRuderman) for Enphase.
 
 ### License
 
-GNU General Public License 
+GNU General Public License
