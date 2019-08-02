@@ -10,7 +10,7 @@ var https = require('https'),
     export ENPHASE_APP_ID='140961117xxxx'
 
 */
-export default enphase = {
+enphase = {
 
   host: 'api.enphaseenergy.com',
   version: '/api/v2',

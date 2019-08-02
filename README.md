@@ -31,7 +31,7 @@ ENPHASE_APP_ID='140961117xxxx'
 Assuming you have your environmental variables set up, you first require the enphase library:
 
 ```javascript
-import enphase from "enlighten-api";
+const enphase = require("enlighten-api");
 ```
 
 Then query the Enphase Enlighten Systems API by instantiating a new `enphase.Request` object.
