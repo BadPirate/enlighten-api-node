@@ -1,5 +1,5 @@
-import jsonp from 'jsonp-client';
 import EnlightenServer from './EnlightenServer';
+import jsonp from 'jsonp-client'
 const baseURL = 'https://api.enphaseenergy.com/api/v2/systems/';
 
 export default class EnlightenAPI
@@ -13,8 +13,6 @@ export default class EnlightenAPI
     this.userID = userID || '4d7a45774e6a41320a';
     this.appID = appID || process.env.ENPHASE_APP_ID;
     this.apiKey = apiKey || process.env.ENPHASE_API_KEY;
-    this.servers = '';
-    var serversPromise = '';
   }
 
   getServers() {
@@ -41,7 +39,12 @@ export default class EnlightenAPI
     return new Promise((executor, reject) => {
       jsonp(url, (error, data) => {
         if(error) {
-          reject(error);
+          switch(error.status) {
+            case 422:
+              reject(new Error(`422 - ${error.response.text}`));
+            default:
+              reject(error);
+          }
         } else {
           executor(data);
         }
