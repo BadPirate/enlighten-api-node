@@ -43,7 +43,7 @@ const api = new EnphaseAPI(userID);
 
 ### Retrieve a system
 
-Most calls (like stats) require you to specify a system.  This is done by first retrieving all systems, and using that object to make system calls.  Server list is cached, and will only go out once per alloc, so don't worry about making multiple calls.  Servers returns a Map of `[server => EnlightenServer]`
+Most calls (like stats) require you to specify a system.  This is done by first retrieving all systems, and using that object to make system calls.  Server list is cached, and will only go out once per alloc, so don't worry about making multiple calls.  Servers returns a Map of `[server => EnlightenSystem]`
 
 ```javascript
 api.getServers()

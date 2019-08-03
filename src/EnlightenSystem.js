@@ -1,4 +1,8 @@
-export default class EnlightenServer {
+/**
+ * A wrapper for a particular system belonging to a user
+ * Should not be constructed manually, retrieve using EnlightenAPI.getServers()
+ */
+export default class EnlightenSystem {
   constructor(parent, props) {
     for (var fld in props) {
       this[fld] = props[fld];
@@ -7,6 +11,14 @@ export default class EnlightenServer {
     this.cachedStats = new Map();
   }
 
+  /**
+   * Retrieves stats for power production for every 5 minute period.  Will return cached values if they exist,
+   * and retrieve any missing values from the server making multiple calls if needed.
+   * 
+   * @param {number=''} startAt unix timestamp for first stat wanted, will round down to nearest 5 min block
+   * @param {number=''} endAt unix timestamp for last stat wanted, will round down to nearest 5 min block
+   * @returns {Promise<Array<Any>>} returns a promise for an array of stats objects
+   */
   getStats(startAt = '', endAt = '') 
   {
     if (startAt) startAt = Math.floor(parseInt(startAt) / 300) * 300;

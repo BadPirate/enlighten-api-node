@@ -24,7 +24,7 @@ describe("EnlightenAPI", _ => {
   });
 })
 
-describe("EnlightenServer", _ => {
+describe("EnlightenSystem", _ => {
   describe("#getStats()", _ => {
     it("Fetches stats without params", done => {
       getServer()
