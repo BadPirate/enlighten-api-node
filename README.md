@@ -1,6 +1,6 @@
 # NodeJS Enphase Enlighten Systems API
 
-npm installable API for making calls to the Enlighten Enphase API
+npm installable API for making calls to the Enlighten Enphase API, includes handling for API rate limiting, caching previously retrieved data for faster access, and some convienience methods (like total power calculation)
 
 ## Motivation
 
