@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/BadPirate/enlighten-api-node.git"
   },
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "src/EnlightenAPI.js",
   "dependencies": {
     "babel-preset-env": "^1.7.0",
