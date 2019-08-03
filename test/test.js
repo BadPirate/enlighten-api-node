@@ -29,20 +29,32 @@ describe("EnlightenSystem", _ => {
     it("Fetches stats without params", done => {
       getServer()
       .then(server => {
-        return server.getStats();
+        return server.getStats(1564848600);
       })
       .then(stats => {
-        chai.expect(stats.intervals.length).to.greaterThan(100);
+        chai.expect(stats.length).to.greaterThan(0);
       })
       .finally(done);
     });
     it("Fetches stats in a specific time window", done => {
       getServer()
       .then(server => {
-        return server.getStats(1564755300,1564775400);
+        return server.getStats(1564848300,1564857000);
       })
       .then(stats => {
-        chai.expect(stats.intervals.length).to.equal(67);
+        chai.expect(stats.length).to.equal(29);
+      })
+      .finally(done);
+    })
+  });
+  describe("#getEnergyProduced()", _ => {
+    it("Calculates correctly", done => {
+      getServer()
+      .then(server => {
+        return server.getEnergyProduced(1564758300,1564857000);
+      })
+      .then(watts => {
+        chai.expect(watts).to.equal(8256);
       })
       .finally(done);
     })
