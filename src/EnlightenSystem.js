@@ -51,10 +51,10 @@ export default class EnlightenSystem {
       }
     }
 
-    // No cache - Retrieve records from API
+    // No cache - Retrieve records from API, fetch as many as we can to conserve
+    // API usage requests, but only return those that were requested
     return this.api('stats', {
       start_at: startAt,
-      end_at: endAt,
     })
     .then(stats => {
       let last = '';
@@ -62,7 +62,8 @@ export default class EnlightenSystem {
       stats.intervals.forEach(statProps => {
         let stat = new EnlightenStat(statProps);
         this.cachedStats.set(stat.startAt,stat);
-        intervals.push(stat);
+        if (stat.endAt <= endAt)
+          intervals.push(stat);
         last = stat.endAt;
       });
       if (last && last < endAt) {
@@ -70,7 +71,7 @@ export default class EnlightenSystem {
         console.log(`API returned less records than desired ${last}, retrieving remainder`);
         return this.getStats(startAt, endAt);
       }
-      return intervals;
+      return intervals
     });
   }
 
