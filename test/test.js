@@ -29,7 +29,7 @@ describe("EnlightenSystem", _ => {
     it("Fetches stats without params", done => {
       getServer()
       .then(server => {
-        return server.getStats(1564848600);
+        return server.getStats(1565055765,1565059365);
       })
       .then(stats => {
         chai.expect(stats.length).to.greaterThan(0);
@@ -54,7 +54,7 @@ describe("EnlightenSystem", _ => {
         return server.getEnergyProduced(1564758300,1564857000);
       })
       .then(watts => {
-        chai.expect(watts).to.equal(8256);
+        chai.expect(watts).to.equal(8255);
       })
       .finally(done);
     })

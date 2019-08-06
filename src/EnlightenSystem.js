@@ -21,7 +21,7 @@ export default class EnlightenSystem {
    */
   getStats(startAt = '', endAt = '') 
   {
-    console.log("stats",startAt || '-', endAt || '-')
+    console.log('getStats()',startAt || '-',endAt || '-');
     if (startAt) startAt = Math.floor(parseInt(startAt) / 300) * 300;
     if (endAt) endAt = Math.floor(parseInt(endAt) / 300) * 300;
     if (endAt && (!startAt || endAt < startAt)) endAt = '';
@@ -32,31 +32,33 @@ export default class EnlightenSystem {
       {
         let intervals = [];
         if (!endAt) endAt = startAt + 30000;
-        while(this.cachedStats.get(at) && at <= endAt)
+        while(this.cachedStats.get(at) && at < endAt)
         {
           intervals.push(this.cachedStats.get(at));
           at += 300;
         }
-        if (at > endAt-300) 
+        if (at >= endAt) 
         {
-          // We had all the needed records in cache
+          console.log('getStats() - Fullfilled by cache');
           return new Promise(e => { e(intervals) });
         }
         // Fetch the remainder using API, append and return
-        console.log(`Retrieved cached ${startAt} - ${at}, fetching to ${endAt} with API`);
+        console.log(`Retrieved cached ${startAt} - ${at-300}, fetching to ${endAt} with API`);
         return this.getStats(at,endAt)
-        .then(stats => {
-          return intervals.concat(stats);
-        });
+          .then(stats => {
+            return intervals.concat(stats);
+          });
       }
     }
 
     // No cache - Retrieve records from API, fetch as many as we can to conserve
     // API usage requests, but only return those that were requested
+    console.log('getStats() - API Request',startAt,'-');
     return this.api('stats', {
       start_at: startAt,
     })
     .then(stats => {
+      console.log(`getStats() - Retrieved ${stats.intervals.length} stats from API`);
       let last = '';
       let intervals = [];
       stats.intervals.forEach(statProps => {
@@ -64,11 +66,11 @@ export default class EnlightenSystem {
         this.cachedStats.set(stat.startAt,stat);
         if (stat.endAt <= endAt)
           intervals.push(stat);
-        last = stat.endAt;
+        last = stat.startAt;
       });
       if (last && last < endAt) {
         // Fetch more records, use cached to fill in
-        console.log(`API returned less records than desired ${last}, retrieving remainder`);
+        console.log(`getStats() - API returned less records than desired ${last} < ${endAt}, retrieving remainder`);
         return this.getStats(startAt, endAt);
       }
       return intervals
